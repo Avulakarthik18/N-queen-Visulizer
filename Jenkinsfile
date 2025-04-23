@@ -24,9 +24,9 @@ pipeline {
         stage('Cleanup Existing Container') {
             steps {
                 bat """
-                for /f %%i in ('docker ps -a -q --filter "name=%CONTAINER_NAME%"') do (
-                    docker stop %%i
-                    docker rm %%i
+                for /f %i in ('docker ps -a -q --filter "name=%CONTAINER_NAME%"') do (
+                    docker stop %i
+                    docker rm %i
                 )
                 """
             }
