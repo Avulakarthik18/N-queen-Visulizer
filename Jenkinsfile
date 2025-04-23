@@ -24,9 +24,9 @@ pipeline {
         stage('Cleanup Existing Container') {
             steps {
                 bat """
-                for /f %i in ('docker ps -a -q --filter "name=%CONTAINER_NAME%"') do (
-                    docker stop %i
-                    docker rm %i
+                for /f %%i in ('docker ps -a -q --filter "name=%CONTAINER_NAME%"') do (
+                    docker stop %%i
+                    docker rm %%i
                 )
                 """
             }
@@ -34,7 +34,7 @@ pipeline {
 
         stage('Run New Container') {
             steps {
-                bat "docker run -d -p 8503:8501 --name %CONTAINER_NAME% %IMAGE_NAME%:%IMAGE_TAG%"
+                bat "docker run -d -p 8501:8501 --name %CONTAINER_NAME% %IMAGE_NAME%:%IMAGE_TAG%"
             }
         }
     }
